@@ -38,7 +38,7 @@ sudo chmod +x $TEMP_DIR/DEBIAN/postrm
 
 echo "Building deb file"
 version=$(grep '^Version:' src/DEBIAN/control | awk '{print $2}')
-dpkg-deb --root-owner-group --build $TEMP_DIR | grep counter.service
+dpkg-deb --root-owner-group --build $TEMP_DIR
 mv $TEMP_DIR.deb counter-v$version.deb
 
 echo "Complete."
