@@ -11,4 +11,4 @@ else
 fi
 
 # Run lintian on the .deb package
--lintian "$DEB_PACKAGE"
+lintian "$DEB_PACKAGE"
