@@ -33,6 +33,21 @@ jobs:
         run: |
           make build-deb
           make test
+  artifact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
+      - name: Test project
+        run: |
+          make build-deb
       - name: Upload Debian package artifact
         uses: actions/upload-artifact@v4
         with:
@@ -48,6 +63,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
       - name: Lint Package
         run: |
           make build-deb
