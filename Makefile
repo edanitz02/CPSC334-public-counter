@@ -24,8 +24,7 @@ build-deb:
 	sudo ls -l /lib/systemd/system/counter.service
 	echo "good"
 
-lint-deb:
+lint-deb: build-deb
 	echo "Linting the .deb package..."
-	sudo chmod +x ./lint.sh
-	./lint.sh
+	-lintian counter-v2.0.0.deb
 
