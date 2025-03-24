@@ -38,3 +38,17 @@ jobs:
         with:
           name: counter-package
           path: counter-v*.deb
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3
+      - name: Lint Package
+        run: |
+          make build-deb
+          make lint-deb
