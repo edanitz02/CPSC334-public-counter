@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Stop counter service
+echo "Stopping counter service"
+sudo systemctl stop counter.service
