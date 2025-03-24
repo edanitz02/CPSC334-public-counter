@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 
 DEB_PACKAGE="counter-v2.0.0.deb"
 
