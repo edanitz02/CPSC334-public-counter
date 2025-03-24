@@ -20,6 +20,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
           make build-deb
           make test
       - run: echo "🍏 This job's status is ${{ job.status }}."
