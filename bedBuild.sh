@@ -2,10 +2,6 @@
 
 TEMP_DIR=temp
 
-echo "making counter user"
-
-sudo adduser --system counter
-
 echo "Starting deb package build"
 
 echo "Making temporary directory tree"
@@ -20,7 +16,7 @@ cp src/DEBIAN/control $TEMP_DIR/DEBIAN/
 echo "no conffiles for DEBIAN"
 
 echo "Copy python script into place"
-cp counter.py $TEMP_DIR/usr/local/bin/
+cp src/counter.py $TEMP_DIR/usr/local/bin/
 
 echo "Service file into place"
 cp counter.service $TEMP_DIR/lib/systemd/system/
