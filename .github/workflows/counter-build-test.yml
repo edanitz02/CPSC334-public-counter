@@ -16,6 +16,10 @@ jobs:
       - name: Build project
         run: |
           make build
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
       - name: Test project
         run: |
           sudo apt update
