@@ -16,10 +16,10 @@ cp src/DEBIAN/control $TEMP_DIR/DEBIAN/
 echo "no conffiles for DEBIAN"
 
 echo "Copy python script into place"
-cp src/counter.py $TEMP_DIR/usr/local/bin/
+cp counter.py $TEMP_DIR/usr/local/bin/
 
 echo "Service file into place"
-cp counter.service $TEMP_DIR/lib/systemd/system/
+cp src/counter.service $TEMP_DIR/lib/systemd/system/
 
 sudo chmod 644 $TEMP_DIR/lib/systemd/system/counter.service
 
