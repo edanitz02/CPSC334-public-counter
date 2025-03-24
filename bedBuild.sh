@@ -25,7 +25,7 @@ cp counter.py $TEMP_DIR/usr/local/bin/
 echo "Service file into place"
 cp counter.service $TEMP_DIR/lib/systemd/system/
 
-sudo chmod 644 /lib/systemd/system/counter.service
+sudo chmod 644 $TEMP_DIR/lib/systemd/system/counter.service
 
 echo "Moving scripts into place"
 cp src/DEBIAN/postinst $TEMP_DIR/DEBIAN/
@@ -38,7 +38,7 @@ sudo chmod +x $TEMP_DIR/DEBIAN/postrm
 
 echo "Building deb file"
 version=$(grep '^Version:' src/DEBIAN/control | awk '{print $2}')
-dpkg-deb --root-owner-group --build $TEMP_DIR
+dpkg-deb --root-owner-group --build $TEMP_DIR | grep counter.service
 mv $TEMP_DIR.deb counter-v$version.deb
 
 echo "Complete."
