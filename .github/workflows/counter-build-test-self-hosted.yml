@@ -71,8 +71,8 @@ jobs:
           sudo apt install python3
           sudo apt-get update
           sudo apt-get install -y python3-pytest
-          sudo apt-get install lintian
           sudo apt-get install -y make
+          sudo apt-get install lintian
       - name: Lint Package
         run: |
           make build-deb
