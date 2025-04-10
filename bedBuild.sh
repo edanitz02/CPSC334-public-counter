@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TEMP_DIR=temp
+TEMP_DIR=tmp
 
 echo "Starting deb package build"
 
