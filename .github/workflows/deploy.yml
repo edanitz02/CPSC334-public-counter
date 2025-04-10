@@ -1,0 +1,39 @@
+name: Counter Build Test
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependences
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make 
+      - name: Build project
+        run: |
+          make build
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          source: "./counter-v2.0.0.deb"
+          target: "/temp"
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            sudo dpkg -i /temp/counter-v2.0.0.deb
+            sudo systemctl restart counter
