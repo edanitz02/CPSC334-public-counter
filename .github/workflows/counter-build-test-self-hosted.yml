@@ -1,1 +1,72 @@
-
+name: Counter Build Test
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  build:
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 2
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Build project
+        run: |
+          make build
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
+      - name: Test project
+        run: |
+          make build-deb
+          make test
+  artifact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
+      - name: Test project
+        run: |
+          make build-deb
+      - name: Upload Debian package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: counter-package
+          path: counter-v*.deb
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install python3
+          sudo apt-get update
+          sudo apt-get install -y python3-pytest
+          sudo apt-get install lintian
+      - name: Lint Package
+        run: |
+          make build-deb
+          make lint-deb
