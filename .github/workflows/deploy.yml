@@ -17,8 +17,8 @@ jobs:
           sudo apt-get install -y make 
       - name: Build project
         run: |
-          make build
-          ls -al
+          make build-deb
+          ls -lh *.deb
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.7
         with:
