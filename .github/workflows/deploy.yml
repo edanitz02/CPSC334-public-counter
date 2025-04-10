@@ -36,5 +36,5 @@ jobs:
           password: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            sudo dpkg -i /temp/counter-v2.0.0.deb
+            sudo dpkg -i /tmp/counter-v2.0.0.deb
             sudo systemctl restart counter
