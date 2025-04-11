@@ -1,4 +1,4 @@
-name: Counter Build Test
+name: Deploy Counter
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   push:
@@ -25,7 +25,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "./*.deb"
           target: "/tmp"
@@ -35,7 +34,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
             sudo dpkg -i /tmp/counter-v2.0.0.deb
