@@ -19,7 +19,7 @@ jobs:
         run: |
           make build-deb
           ls -lh *.deb
-      - name: copy file via ssh password
+      - name: copy file via ssh key
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
@@ -28,7 +28,7 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "./*.deb"
           target: "/tmp"
-      - name: executing remote ssh commands using password
+      - name: executing remote ssh commands using key
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST }}
@@ -36,5 +36,5 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            sudo dpkg -i /tmp/counter-v2.0.0.deb
-            sudo systemctl restart counter
+            dpkg -i /tmp/counter-v2.0.0.deb
+            systemctl restart counter
